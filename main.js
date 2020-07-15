@@ -1,4 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const data = require('./data');
 
 app.on('ready', () => {
   console.log('app is ready');
@@ -40,3 +41,7 @@ ipcMain.on('abrir-janela-sobre', () => {
 ipcMain.on('fechar-janela-sobre', () => {
   aboutWindow.close();
 })
+
+ipcMain.on('stop-task', (event, task, time) => {
+  data.saveData(task, time);
+});

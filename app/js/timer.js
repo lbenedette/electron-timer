@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron');
 const moment = require('moment');
 
 let seconds;
@@ -20,7 +21,9 @@ module.exports = {
       element.textContent = secondsToTime(seconds);
     }, 1000)
   },
-  stop() {
+  stop(task) {
     clearInterval(clock);
+    console.log('oi?');
+    ipcRenderer.send('stop-task', task, secondsToTime(seconds));
   }
 }
